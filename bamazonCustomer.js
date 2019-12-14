@@ -11,13 +11,13 @@ const connection = mysql.createConnection({
     password: process.env['PASSWORD'],
     database: 'bamazon'
 });
-
-connection.connect(err => {
-    if (err) throw err;
-    console.log(`Connection thread: ${connection.threadId}`);
-    seeItems();
-    //connection.end();
-});
+function start() {
+    connection.connect(err => {
+        if (err) throw err;
+        console.log(`Connection thread: ${connection.threadId}`);
+        seeItems();
+    });
+}
 
 function seeItems() {
     connection.query('SELECT * FROM products', (err, res) => {
@@ -34,25 +34,58 @@ function main() {
         name: 'getItem'
     }).then(res => {
         let item = res.getItem;
-        connection.query('SELECT * FROM products WHERE ?', { item_id: item }, (err, res) => {
+        connection.query('SELECT * FROM products WHERE ?', { item_id: item }, (err, resConnection) => {
             if (err) throw err;
             console.log('Item Chosen: ');
-            if (res.length === 0) {
+            if (resConnection.length === 0) {
                 console.log('Sorry, cannot find that item, please try again.'.red);
                 main();
             } else {
-                console.log('was successfull');
-                console.table(res);
+                console.table(resConnection);
                 inq.prompt({
                     type: 'input',
                     message: 'How many would you like to purchase?',
                     name: 'num'
-                }).then(res => {
-                    console.log(res.num);
+                }).then(res2 => {
+                    let num = res2.num;
+                    let quantity = resConnection[0].stock_quantity;
+                    if (quantity >= num) {
+                        let total = resConnection[0].price * num;
+                        console.log('For: '.cyan + resConnection[0].product_name.yellow);
+                        console.log('Number of items: '.cyan + num.yellow);
+                        console.log('Total cost: '.cyan + total.toString().yellow);
+                        connection.query('UPDATE products SET ? WHERE ?', [{ stock_quantity: quantity - num }, { item_id: item }], (err) => {
+                            if (err) throw err;
+                        });
+                        end();
+                    } else {
+                        console.log('sorry, we do not have that many in stock.');
+                        end();
+                    }
+
                 });
-                connection.end();
+                //end();
+                //connection.end();
             }
         });
     });
 }
 
+function end() {
+    inq.prompt({
+        type: 'list',
+        message: 'What would you like to do?',
+        choices: ['Continue Shopping', 'Quit'],
+        name: 'choice'
+    }).then(res => {
+        if (res.choice === 'Continue Shopping') {
+            //connection.end();
+            seeItems();
+        } else {
+            process.exit();
+            connection.end();
+        }
+    });
+}
+
+start();
