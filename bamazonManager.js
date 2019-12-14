@@ -32,7 +32,7 @@ function main() {
         } else if (res.choice === 'View Low Inventory') {
             lowQuantity();
         } else if (res.choice === 'Add to Inventory') {
-            //add();
+            add();
         } else if (res.choice === 'Add New Product') {
             addNew();
         }
@@ -52,6 +52,34 @@ function lowQuantity() {
     connection.query('SELECT * FROM products WHERE stock_quantity < 5', (err, res) => {
         if (err) throw err;
         console.table(res);
+    });
+}
+
+function add() {
+    inq.prompt({
+        type: 'input',
+        message: 'Please enter the item_id you want to add inventory to',
+        name: 'item'
+    }).then(res => {
+        let item = res.item;
+        inq.prompt({
+            type: 'input',
+            message: 'How much do you want to add to the inventory?',
+            name: 'num'
+        }).then(result => {
+            let num = result.num;
+            connection.query('SELECT * FROM products WHERE ?', { item_id: item }, (err, res1) => {
+                if (err) throw err;
+                console.table(res1);
+
+                let final = res1[0].stock_quantity + num;
+                connection.query('UPDATE products SET ? WHERE ?', [{ stock_quantity: final }, { item_id: item }], err => {
+                    if (err) throw err;
+                    viewProducts();
+                });
+            });
+
+        });
     });
 }
 
