@@ -29,6 +29,12 @@ function main() {
     }).then(res => {
         if (res.choice === 'View Products for Sale') {
             viewProducts();
+        } else if (res.choice === 'View Low Inventory') {
+            lowQuantity();
+        } else if (res.choice === 'Add to Inventory') {
+            //add();
+        } else if (res.choice === 'Add New Product') {
+            addNew();
         }
 
     });
@@ -42,6 +48,35 @@ function viewProducts() {
     });
 }
 
+function lowQuantity() {
+    connection.query('SELECT * FROM products WHERE stock_quantity < 5', (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    });
+}
 
+function addNew() {
+    inq.prompt({
+        type: 'input',
+        message: 'Please enter product name',
+        name: 'result'
+    }).then(name => {
+        let productName = name.result;
+        inq.prompt({
+            type: 'input',
+            message: 'Please enter the department name, the price, and the quantity separated by a space',
+            name: 'depPrice'
+        }).then(res => {
+            let arr = res.depPrice.split(' ');
+            let department = arr[0];
+            let price = arr[1];
+            let quantity = parseInt(arr[2]);
+            connection.query('INSERT INTO products SET ?', { product_name: productName, department_name: department, price: price, stock_quantity: quantity }, (err, res) => {
+                if (err) throw err;
+                viewProducts();
+            });
+        });
+    });
+}
 
 start();
