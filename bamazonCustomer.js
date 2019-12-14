@@ -62,10 +62,7 @@ function main() {
                         console.log('sorry, we do not have that many in stock.');
                         end();
                     }
-
                 });
-                //end();
-                //connection.end();
             }
         });
     });
@@ -79,7 +76,6 @@ function end() {
         name: 'choice'
     }).then(res => {
         if (res.choice === 'Continue Shopping') {
-            //connection.end();
             seeItems();
         } else {
             process.exit();
