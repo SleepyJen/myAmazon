@@ -53,13 +53,13 @@ function main() {
                         let total = resConnection[0].price * num;
                         console.log('For: '.cyan + resConnection[0].product_name.yellow);
                         console.log('Number of items: '.cyan + num.yellow);
-                        console.log('Total cost: '.cyan + total.toString().yellow);
+                        console.log('Total cost: $'.cyan + total.toString().yellow);
                         connection.query('UPDATE products SET ? WHERE ?', [{ stock_quantity: quantity - num }, { item_id: item }], (err) => {
                             if (err) throw err;
                         });
                         end();
                     } else {
-                        console.log('sorry, we do not have that many in stock.');
+                        console.log('sorry, we do not have that many in stock.'.red);
                         end();
                     }
                 });
