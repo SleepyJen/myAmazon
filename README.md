@@ -38,6 +38,6 @@ If the 'Add New Product' choice is chosen, the user is asked what the name is fo
 ![add product](https://github.com/SleepyJen/myAmazon/blob/master/images/10.png)
 
 The resulting table is shown again.
-![result](If the user clicks 'Exit', then the program as well as the connection exits.)
+![result](https://github.com/SleepyJen/myAmazon/blob/master/images/11.png)
 
 If the user clicks 'Exit', then the program as well as the connection exits.
