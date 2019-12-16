@@ -16,7 +16,6 @@ function start() {
         if (err) throw err;
         console.log(`Connected on: ${connection.threadId}`);
         main();
-        //connection.end();
     });
 }
 
@@ -35,6 +34,9 @@ function main() {
             add();
         } else if (res.choice === 'Add New Product') {
             addNew();
+        } else {
+            connection.end();
+            process.exit();
         }
 
     });
@@ -44,7 +46,7 @@ function viewProducts() {
     connection.query('SELECT * FROM products', (err, res) => {
         if (err) throw err;
         console.table(res);
-        connection.end();
+        main();
     });
 }
 
@@ -52,6 +54,7 @@ function lowQuantity() {
     connection.query('SELECT * FROM products WHERE stock_quantity < 5', (err, res) => {
         if (err) throw err;
         console.table(res);
+        main();
     });
 }
 
