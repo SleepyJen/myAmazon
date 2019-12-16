@@ -75,7 +75,7 @@ function add() {
                 if (err) throw err;
                 console.table(res1);
 
-                let final = res1[0].stock_quantity + num;
+                let final = parseInt(res1[0].stock_quantity) + parseInt(num);
                 connection.query('UPDATE products SET ? WHERE ?', [{ stock_quantity: final }, { item_id: item }], err => {
                     if (err) throw err;
                     viewProducts();
