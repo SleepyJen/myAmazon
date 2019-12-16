@@ -15,3 +15,20 @@ Once the user enters the quantity in which they would like to purchase and click
 If the user clicks "Continue Shopping", the new and updated inventory table is shown.
 ![conclusion](https://github.com/SleepyJen/myAmazon/blob/master/images/4.png)
 
+### **For the bamazonManager.js page**
+
+When the js file is ran, the user is given a list to choose from, which contains 'View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', and 'Exit'.
+![list](https://github.com/SleepyJen/myAmazon/blob/master/images/5.png)
+
+If the 'View Products for Sale' is chosen, then a table of all the products is shown and the menu is shown again.
+![table](https://github.com/SleepyJen/myAmazon/blob/master/images/6.png)
+
+If the 'View Low Inventory' choice is chosen, then a table of all the products that have a quantity below 5 will be shown, abd the menu is shown again.
+![low inventory](https://github.com/SleepyJen/myAmazon/blob/master/images/7.png)
+
+If the 'Add to Inventory' choice is chosen, then the user will be asked what item, by item_id would they like to target, then they will be asked what quantity they would like to add to the item.
+![add to inventory](https://github.com/SleepyJen/myAmazon/blob/master/images/8.png)
+
+The resulting table of all products would then be shown.
+![new table](https://github.com/SleepyJen/myAmazon/blob/master/images/9.png)
+
