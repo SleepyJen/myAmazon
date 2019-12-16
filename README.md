@@ -15,6 +15,8 @@ Once the user enters the quantity in which they would like to purchase and click
 If the user clicks "Continue Shopping", the new and updated inventory table is shown.
 ![conclusion](https://github.com/SleepyJen/myAmazon/blob/master/images/4.png)
 
+If the user clicks 'Exit', then the program as well as the connection exits.
+
 ### **For the bamazonManager.js page**
 
 When the js file is ran, the user is given a list to choose from, which contains 'View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', and 'Exit'.
@@ -29,6 +31,13 @@ If the 'View Low Inventory' choice is chosen, then a table of all the products t
 If the 'Add to Inventory' choice is chosen, then the user will be asked what item, by item_id would they like to target, then they will be asked what quantity they would like to add to the item.
 ![add to inventory](https://github.com/SleepyJen/myAmazon/blob/master/images/8.png)
 
-The resulting table of all products would then be shown.
+The resulting table of all products would then be shown and the menu pops up again.
 ![new table](https://github.com/SleepyJen/myAmazon/blob/master/images/9.png)
 
+If the 'Add New Product' choice is chosen, the user is asked what the name is for the product. After the input, the user is asked to provide the department name, price and quantity all on one line separated by a space. 
+![add product](https://github.com/SleepyJen/myAmazon/blob/master/images/10.png)
+
+The resulting table is shown again.
+![result](If the user clicks 'Exit', then the program as well as the connection exits.)
+
+If the user clicks 'Exit', then the program as well as the connection exits.
